@@ -14,6 +14,12 @@ module.exports = function(grunt) {
         dist: 'dist',
         features: 'app/**',
         // Task configuration.
+        browserify : {
+            dist : {
+                src : 'app/main/main.js',
+                dest : '<%= dist + "/build.js" %>'
+            }
+        },
         concat: {
             options: {
                 separator : '\n',
@@ -60,13 +66,26 @@ module.exports = function(grunt) {
                 files: '<%= jshint.gruntfile.src %>',
                 tasks: ['jshint:gruntfile']
             },
-            lib_test: {
+            jshint: {
                 files: '<%= jshint.lib_test.src %>',
                 tasks: ['jshint:lib_test']
             },
             styles: {
                 files: '<%= concat.styles.src %>',
                 tasks: ['concat:styles', 'stylus:dist']
+            },
+            templates: {
+                files: '<%= html2js.dist.src %>',
+                tasks: ['html2js:dist']
+            },
+            browserify: {
+                files: '<%= browserify.dist.src %>',
+                tasks: ['browserify:dist']
+            },
+            devel: {
+                src: [
+                    '<%= jshint.lib_test.src %>'
+                ]
             }
         }
     });
