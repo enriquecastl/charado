@@ -12,6 +12,7 @@ module.exports = function(grunt) {
             ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
         tmp : 'tmp',
         dist: 'dist',
+        features: 'app/**',
         // Task configuration.
         concat: {
             options: {
@@ -20,7 +21,7 @@ module.exports = function(grunt) {
             },
 
             styles: {
-                src : ['app/**/styles.styl'],
+                src : ['<%= features + "/styles.styl"'],
                 dest: '<%= tmp + "/styles.styl" %>'
             }
         },
@@ -44,6 +45,16 @@ module.exports = function(grunt) {
                 src: ['app/**/.js']
             }
         },
+        html2js: {
+            options: {
+                base: '../charados/app/',
+                module : 'templates'
+            },
+            dist: {
+                src: '<%= features + "/templates/*.html" %>',
+                dest: '<%= dist + "/templates.js" %>'
+            }
+        },
         watch: {
             gruntfile: {
                 files: '<%= jshint.gruntfile.src %>',
@@ -61,9 +72,11 @@ module.exports = function(grunt) {
     });
 
     // These plugins provide necessary tasks.
+    grunt.loadNpmTasks('grunt-contrib-concat')
     grunt.loadNpmTasks('grunt-contrib-jshint')
     grunt.loadNpmTasks('grunt-contrib-stylus')
-    grunt.loadNpmTasks('grunt-contrib-concat')
+    grunt.loadNpmTasks('grunt-html2js')
+    grunt.loadNpmTasks('grunt-browserify')
     grunt.loadNpmTasks('grunt-contrib-watch')
 
     // Default task.
