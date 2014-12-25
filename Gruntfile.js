@@ -28,7 +28,7 @@ module.exports = function(grunt) {
         src: 'Gruntfile.js'
       },
       lib_test: {
-        src: ['lib/**/*.js', 'test/**/*.js']
+        src: ['app/**/.js']
       }
     },
     qunit: {
@@ -52,6 +52,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch')
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'qunit', 'concat', 'uglify'])
+  grunt.registerTask('default', ['jshint', 'uglify'])
 
 }
