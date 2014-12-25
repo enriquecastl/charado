@@ -10,14 +10,27 @@ module.exports = function(grunt) {
             '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
             '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
             ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
+        tmp : 'tmp',
+        dist: 'dist',
         // Task configuration.
-        uglify: {
+        concat: {
             options: {
-                banner: '<%= banner %>'
+                separator : '\n',
+                banner : '<%= grunt.banner %>'
             },
-            dist: {
-                src: '<%= concat.dist.dest %>',
-                dest: 'dist/<%= pkg.name %>.min.js'
+
+            styles: {
+                src : ['app/**/styles.styl'],
+                dest: '<%= tmp + "/styles.styl" %>'
+            }
+        },
+        stylus: {
+            options: {
+                compress: true
+            },
+            dist : {
+                src : ['<%= concat.styles.dest %>'],
+                dest : '<%= dist + "/styles.css" %>'
             }
         },
         jshint: {
@@ -31,9 +44,6 @@ module.exports = function(grunt) {
                 src: ['app/**/.js']
             }
         },
-        qunit: {
-            files: ['test/**/*.html']
-        },
         watch: {
             gruntfile: {
                 files: '<%= jshint.gruntfile.src %>',
@@ -41,17 +51,23 @@ module.exports = function(grunt) {
             },
             lib_test: {
                 files: '<%= jshint.lib_test.src %>',
-                tasks: ['jshint:lib_test', 'qunit']
+                tasks: ['jshint:lib_test']
+            },
+            styles: {
+                files: '<%= concat.styles.src %>',
+                tasks: ['concat:styles', 'stylus:dist']
             }
         }
     });
 
     // These plugins provide necessary tasks.
-    grunt.loadNpmTasks('grunt-contrib-uglify')
     grunt.loadNpmTasks('grunt-contrib-jshint')
+    grunt.loadNpmTasks('grunt-contrib-stylus')
+    grunt.loadNpmTasks('grunt-contrib-concat')
     grunt.loadNpmTasks('grunt-contrib-watch')
 
     // Default task.
     grunt.registerTask('default', ['jshint', 'uglify'])
+    grunt.registerTask('styles', ['concat', 'stylus'])
 
 }
