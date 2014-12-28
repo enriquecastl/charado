@@ -109,6 +109,10 @@ module.exports = function(grunt) {
                 files: '<%= html2js.dist.src %>',
                 tasks: ['html2js:dist']
             },
+            handlebars: {
+                files: 'app/index.hbl',
+                tasks : ['compile-handlebars']
+            },
             browserify: {
                 files: '<%= jshint.lib_test.src %>',
                 tasks: ['browserify:dist']
