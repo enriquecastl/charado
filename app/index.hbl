@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>Charado</title>
+        <link type="text/css" rel="stylesheet" src="{{styles}}" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/{{ngVersion}}/angular.min.js">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/{{ngVersion}}/angular-route.min.js">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/{{ngVersion}}/angular-resource.min.js">
+        </script>
+        <script src="{{templates}}"></script>
+        <script src="{{app}}"></script>
+    </head>
+    <body>
+
+    </body>
+</html>
