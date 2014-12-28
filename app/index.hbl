@@ -1,4 +1,4 @@
-<html>
+<html ng-app="charado">
     <head>
         <title>Charado</title>
         <link type="text/css" rel="stylesheet" src="{{styles}}" />

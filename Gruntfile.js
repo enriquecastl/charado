@@ -21,7 +21,7 @@ module.exports = function(grunt) {
         // Task configuration.
         browserify : {
             dist : {
-                src : 'app/main/main.js',
+                src : 'app/main/index.js',
                 dest : '<%= dist + "/" + distFiles.build %>'
             }
         },
@@ -79,7 +79,20 @@ module.exports = function(grunt) {
                 output: 'dist/index.html'
             }
         },
+        connect : {
+            serve: {
+                options: {
+                    port: 3000,
+                    livereload : true,
+                    open : true,
+                    base : '<%= dist %>'
+                }
+            }
+        },
         watch: {
+            options: {
+                livereload : true
+            },
             gruntfile: {
                 files: '<%= jshint.gruntfile.src %>',
                 tasks: ['jshint:gruntfile']
@@ -104,6 +117,7 @@ module.exports = function(grunt) {
     });
 
     // These plugins provide necessary tasks.
+    grunt.loadNpmTasks('grunt-contrib-connect')
     grunt.loadNpmTasks('grunt-contrib-concat')
     grunt.loadNpmTasks('grunt-contrib-jshint')
     grunt.loadNpmTasks('grunt-contrib-stylus')
@@ -114,9 +128,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-browserify')
 
     // Default task.
-    grunt.registerTask('default', ['styles', 'compile', 'templates', 'clean'])
     grunt.registerTask('styles', ['concat', 'stylus'])
     grunt.registerTask('compile', ['jshint', 'browserify'])
     grunt.registerTask('templates', ['html2js', 'compile-handlebars'])
-
+    grunt.registerTask('build', ['styles', 'compile', 'templates', 'clean'])
+    grunt.registerTask('serve', ['build', 'connect:serve', 'watch'])
+    grunt.registerTask('default', ['build'])
 }
