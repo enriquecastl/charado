@@ -1,7 +1,10 @@
 <html ng-app="charado">
     <head>
         <title>Charado</title>
-        <link type="text/css" rel="stylesheet" src="{{styles}}" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700|Roboto:400,300,100,500,700'
+        rel='stylesheet' type='text/css' />
+        <link type="text/css" rel="stylesheet" href="{{styles}}" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/{{ngVersion}}/angular.min.js">
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/{{ngVersion}}/angular-route.min.js">
@@ -12,6 +15,6 @@
         <script src="{{build}}"></script>
     </head>
     <body>
-
+        <start></start>
     </body>
 </html>
