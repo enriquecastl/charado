@@ -3,7 +3,7 @@ module.exports = function buildModule() {
 
     var module = angular.module('setup-teams', [])
 
-    module.directive('setup-teams', require('./setup-teams-directive'))
+    module.directive('setupTeams', require('./setup-teams-directive'))
 
     return module.name
 }
