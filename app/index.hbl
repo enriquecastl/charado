@@ -9,7 +9,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/{{ngVersion}}/angular-resource.min.js">
         </script>
         <script src="{{templates}}"></script>
-        <script src="{{app}}"></script>
+        <script src="{{build}}"></script>
     </head>
     <body>
 

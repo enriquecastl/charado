@@ -12,14 +12,20 @@ module.exports = function(grunt) {
             ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
         tmp : 'tmp',
         dist: 'dist',
+        distFiles : {
+            build : 'build.js',
+            templates : 'template.js',
+            styles : 'styles.css'
+        },
         features: 'app/**',
         // Task configuration.
         browserify : {
             dist : {
                 src : 'app/main/main.js',
-                dest : '<%= dist + "/build.js" %>'
+                dest : '<%= dist + "/" + distFiles.build %>'
             }
         },
+        clean : ['tmp'],
         concat: {
             options: {
                 separator : '\n',
@@ -37,7 +43,7 @@ module.exports = function(grunt) {
             },
             dist : {
                 src : ['<%= concat.styles.dest %>'],
-                dest : '<%= dist + "/styles.css" %>'
+                dest : '<%= dist + "/" + distFiles.styles %>'
             }
         },
         jshint: {
@@ -58,7 +64,7 @@ module.exports = function(grunt) {
             },
             dist: {
                 src: '<%= features + "/templates/*.html" %>',
-                dest: '<%= dist + "/templates.js" %>'
+                dest: '<%= dist + "/" + distFiles.templates %>'
             }
         },
         'compile-handlebars': {
@@ -66,9 +72,9 @@ module.exports = function(grunt) {
                 template: 'app/index.hbl',
                 templateData: {
                     ngVersion: '1.3.7',
-                    styles: '<%= stylus.dist.dest %>',
-                    templates: '<%= html2js.dist.dest %>',
-                    app: '<%= browserify.dist.dest %>'
+                    styles: '<%= distFiles.styles %>',
+                    templates: '<%= distFiles.templates %>',
+                    build: '<%= distFiles.build %>'
                 },
                 output: 'dist/index.html'
             }
@@ -101,13 +107,16 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat')
     grunt.loadNpmTasks('grunt-contrib-jshint')
     grunt.loadNpmTasks('grunt-contrib-stylus')
-    grunt.loadNpmTasks('grunt-compile-handlebars')
     grunt.loadNpmTasks('grunt-contrib-watch')
+    grunt.loadNpmTasks('grunt-contrib-clean')
+    grunt.loadNpmTasks('grunt-compile-handlebars')
     grunt.loadNpmTasks('grunt-html2js')
     grunt.loadNpmTasks('grunt-browserify')
 
     // Default task.
-    grunt.registerTask('default', ['jshint', 'uglify'])
+    grunt.registerTask('default', ['styles', 'compile', 'templates', 'clean'])
     grunt.registerTask('styles', ['concat', 'stylus'])
+    grunt.registerTask('compile', ['jshint', 'browserify'])
+    grunt.registerTask('templates', ['html2js', 'compile-handlebars'])
 
 }
