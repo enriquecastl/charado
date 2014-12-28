@@ -5,7 +5,8 @@
         'ngRoute',
         'ngResource',
         'templates',
-        require('../start')()
+        require('../start')(),
+        require('../setup-teams')()
     ])
 
     return module
