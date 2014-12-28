@@ -1,6 +1,7 @@
 /*global module:false*/
 module.exports = function(grunt) {
-    'use strict';
+    'use strict'
+
     // Project configuration.
     grunt.initConfig({
       // Metadata.
@@ -39,7 +40,9 @@ module.exports = function(grunt) {
         },
         stylus: {
             options: {
-                compress: true
+                compress: true,
+                use : [require('nib')],
+                import : ['nib']
             },
             dist : {
                 src : ['<%= concat.styles.dest %>'],
