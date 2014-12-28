@@ -16,6 +16,6 @@
         <script src="{{build}}"></script>
     </head>
     <body>
-        <setup-teams></setup-teams>
+        <pick-categories></pick-categories>
     </body>
 </html>

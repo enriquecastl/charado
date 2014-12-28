@@ -6,7 +6,8 @@
         'ngResource',
         'templates',
         require('../start')(),
-        require('../setup-teams')()
+        require('../setup-teams')(),
+        require('../pick-categories')()
     ])
 
     return module
