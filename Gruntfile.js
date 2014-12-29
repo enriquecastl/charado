@@ -38,6 +38,12 @@ module.exports = function(grunt) {
                 dest: '<%= tmp + "/styles.styl" %>'
             }
         },
+        copy : {
+            dist : {
+                src : ['<%= features + "/assets/*" %>'],
+                dest: '<%= dist + "/assets/" %>'
+            }
+        },
         stylus: {
             options: {
                 compress: true,
@@ -119,6 +125,10 @@ module.exports = function(grunt) {
             browserify: {
                 files: '<%= jshint.lib_test.src %>',
                 tasks: ['browserify:dist']
+            },
+            assets: {
+                files: 'app/**/assets/*',
+                tasks: ['newer:copy:dist']
             }
         }
     });
@@ -126,19 +136,21 @@ module.exports = function(grunt) {
     // These plugins provide necessary tasks.
     grunt.loadNpmTasks('grunt-contrib-connect')
     grunt.loadNpmTasks('grunt-contrib-concat')
+    grunt.loadNpmTasks('grunt-contrib-copy')
     grunt.loadNpmTasks('grunt-contrib-jshint')
     grunt.loadNpmTasks('grunt-contrib-stylus')
     grunt.loadNpmTasks('grunt-contrib-watch')
     grunt.loadNpmTasks('grunt-contrib-clean')
     grunt.loadNpmTasks('grunt-compile-handlebars')
     grunt.loadNpmTasks('grunt-html2js')
+    grunt.loadNpmTasks('grunt-newer')
     grunt.loadNpmTasks('grunt-browserify')
 
     // Default task.
     grunt.registerTask('styles', ['concat', 'stylus'])
     grunt.registerTask('compile', ['jshint', 'browserify'])
     grunt.registerTask('templates', ['html2js', 'compile-handlebars'])
-    grunt.registerTask('build', ['styles', 'compile', 'templates', 'clean'])
+    grunt.registerTask('build', ['newer:copy:dist', 'styles', 'compile', 'templates', 'clean'])
     grunt.registerTask('serve', ['build', 'connect:serve', 'watch'])
     grunt.registerTask('default', ['build'])
 }
