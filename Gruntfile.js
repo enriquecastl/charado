@@ -40,8 +40,15 @@ module.exports = function(grunt) {
         },
         copy : {
             dist : {
-                src : ['<%= features + "/assets/*" %>'],
-                dest: '<%= dist + "/assets/" %>'
+                files : [
+                    {
+                        expand : true,
+                        cwd : 'app',
+                        src : '**/assets/*',
+                        flatten : true,
+                        dest : '<%= dist + "/assets" %>'
+                    }
+                ]
             }
         },
         stylus: {
