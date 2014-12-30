@@ -17,6 +17,6 @@ module.exports = function(config) {
             }
         ],
 
-        logLevel : 'LOG_INFO'
+        logLevel : 'LOG_DEBUG'
     })
 }

@@ -115,7 +115,8 @@ module.exports = function(grunt) {
         karma : {
             unit: {
                 configFile: 'karma.conf.js',
-                background : true
+                background : true,
+                singleRun : false
             }
         },
         watch: {
@@ -152,7 +153,7 @@ module.exports = function(grunt) {
             },
             karma: {
                 files: ['specs/**/*.js', 'app/**/*.js'],
-                tasks : ['jshint:test', 'browserify:test', 'karma:unit:run']
+                tasks : ['jshint', 'browserify:test', 'karma:unit:run']
             }
         }
     });
@@ -176,7 +177,8 @@ module.exports = function(grunt) {
     grunt.registerTask('compile', ['jshint', 'browserify'])
     grunt.registerTask('templates', ['html2js', 'compile-handlebars'])
     grunt.registerTask('build', ['newer:copy:dist', 'styles', 'compile', 'templates', 'clean'])
-    grunt.registerTask('test', ['build', 'karma:unit', 'watch'])
     grunt.registerTask('serve', ['build', 'connect:serve', 'watch'])
+    grunt.registerTask('build-test', ['jshint', 'browserify:test'])
+    grunt.registerTask('test', ['build-test', 'karma:unit:run', 'watch:karma'])
     grunt.registerTask('default', ['build'])
 }
