@@ -5,7 +5,10 @@
         'ngRoute',
         'ngResource',
         'templates',
-        require('../start')()
+        require('../start')(),
+        require('../setup-teams')(),
+        require('../pick-categories')(),
+        require('../play-game')()
     ])
 
     return module

@@ -1,0 +1,64 @@
+pick-categories
+    display flex
+    flex-direction column
+    justify-content space-between
+    width 100%
+    height 100%
+
+    h1
+        flex-shrink 0
+        font-size font-size-l
+        text-align center
+        margin size-m 0
+        line-height 1.5
+
+    div.categories-container
+        display flex
+        align-items space-between
+        flex-direction column
+        flex-grow 1
+
+        ul.categories
+            display flex
+            flex-grow 1
+            flex-wrap wrap
+            justify-content space-around
+            align-items flex-start
+            align-content flex-start
+            padding size-s size-m
+            overflow-y auto
+
+            li.category
+                position relative
+                margin-bottom size-m
+
+                img
+                    width 150px
+                    height 150px
+
+                span.category-label
+                    position absolute
+                    bottom 0
+                    width 100%
+                    padding (size-m - 4) size-s
+                    color white
+                    text-shadow 1px 1px 1px rgba(50,50,50,0.5)
+
+                    &.red
+                        background-color color-red-light
+
+                    &.yellow
+                        background-color color-yellow-light
+
+                    &.purple
+                        background-color color-purple-light
+
+                    &.green
+                        background-color color-green-light
+
+        button.continue
+            flex-shrink 0
+            padding size-m 0
+            background-color color-blue
+            color white
+            border 0
