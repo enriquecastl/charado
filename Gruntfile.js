@@ -105,6 +105,13 @@ module.exports = function(grunt) {
                 }
             }
         },
+        karma : {
+            unit: {
+                configFile: 'karma.conf.js',
+                autoWatch : true,
+                background : false
+            }
+        },
         watch: {
             options: {
                 livereload : true
@@ -152,6 +159,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-html2js')
     grunt.loadNpmTasks('grunt-newer')
     grunt.loadNpmTasks('grunt-browserify')
+    grunt.loadNpmTasks('grunt-karma')
 
     // Default task.
     grunt.registerTask('styles', ['concat', 'stylus'])
