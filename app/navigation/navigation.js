@@ -13,7 +13,12 @@ function navigationFactory(machina) {
                     this.transition('start')
                 }
             },
-            start : true
+            start : {
+                next : function() {
+                    this.transition('setup-teams')
+                }
+            },
+            'setup-teams' : true
         }
     })
 

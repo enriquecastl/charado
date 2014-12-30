@@ -27,4 +27,19 @@ describe('navigation', function() {
             expect(sut.state).toEqual('start')
         })
     })
+
+    describe('when going to the next state', function() {
+        describe('given the current state is start', function() {
+            beforeEach(buildSut)
+            beforeEach(function() {
+                sut.handle('initialize')
+                sut.handle('next')
+            })
+
+            it('should transition to setup-teams', function() {
+                expect(sut.state).toEqual('setup-teams')
+            })
+        })
+
+    })
 })
