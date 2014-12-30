@@ -18,7 +18,26 @@ function navigationFactory(machina) {
                     this.transition('setup-teams')
                 }
             },
-            'setup-teams' : true
+            'setup-teams' : {
+                next : function() {
+                    this.transition('pick-categories')
+                }
+            },
+            'pick-categories' : {
+                next : function() {
+                    this.transition('game')
+                }
+            },
+            game : {
+                next : function() {
+                    this.transition('over')
+                }
+            },
+            over : {
+                next : function() {
+                    this.transition('start')
+                }
+            }
         }
     })
 
