@@ -47,13 +47,14 @@ play-game
 
             div.word-and-ball
                 display flex
+                flex-direction column
                 flex-grow 1
                 justify-content center
-                flex-wrap wrap
                 align-items center
 
                 div.word
                     font-size font-size-xxl
+                    margin size-xl 0
 
                 div.ball
                     width 150px
@@ -66,7 +67,6 @@ play-game
                     border-radius 50%
                     font-size 20px
                     box-shadow 0 2px 5px 0 rgba(0, 0, 0, 0.26)
-                    align-self baseline
 
         button.continue
             flex-shrink 0
