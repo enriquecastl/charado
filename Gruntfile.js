@@ -21,6 +21,10 @@ module.exports = function(grunt) {
         features: 'app/**',
         // Task configuration.
         browserify : {
+            test : {
+                src : ['specs/**/*.js'],
+                dest : 'test/build.js'
+            },
             dist : {
                 src : 'app/main/index.js',
                 dest : '<%= dist + "/" + distFiles.build %>'
@@ -71,6 +75,9 @@ module.exports = function(grunt) {
             },
             lib_test: {
                 src: ['app/**/*.js', 'app/*.js']
+            },
+            test: {
+                src: ['specs/**/*.js']
             }
         },
         html2js: {
@@ -108,8 +115,7 @@ module.exports = function(grunt) {
         karma : {
             unit: {
                 configFile: 'karma.conf.js',
-                autoWatch : true,
-                background : false
+                background : true
             }
         },
         watch: {
@@ -143,6 +149,10 @@ module.exports = function(grunt) {
             assets: {
                 files: 'app/**/assets/*',
                 tasks: ['newer:copy:dist']
+            },
+            karma: {
+                files: ['specs/**/*.js', 'app/**/*.js'],
+                tasks : ['jshint:test', 'browserify:test', 'karma:unit:run']
             }
         }
     });
@@ -166,6 +176,7 @@ module.exports = function(grunt) {
     grunt.registerTask('compile', ['jshint', 'browserify'])
     grunt.registerTask('templates', ['html2js', 'compile-handlebars'])
     grunt.registerTask('build', ['newer:copy:dist', 'styles', 'compile', 'templates', 'clean'])
+    grunt.registerTask('test', ['build', 'karma:unit', 'watch'])
     grunt.registerTask('serve', ['build', 'connect:serve', 'watch'])
     grunt.registerTask('default', ['build'])
 }
