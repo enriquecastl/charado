@@ -16,6 +16,6 @@
         <script src="{{build}}"></script>
     </head>
     <body>
-        <pick-categories></pick-categories>
+        <play-game></play-game>
     </body>
 </html>

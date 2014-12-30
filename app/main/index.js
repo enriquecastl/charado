@@ -7,7 +7,8 @@
         'templates',
         require('../start')(),
         require('../setup-teams')(),
-        require('../pick-categories')()
+        require('../pick-categories')(),
+        require('../play-game')()
     ])
 
     return module

@@ -1,0 +1,76 @@
+play-game
+    display flex
+    flex-direction column
+    width 100%
+    height 100%
+
+    div.scores
+        padding size-m
+        display flex
+        justify-content space-between
+
+        span.score
+            flex-basis 40%
+            flex-shrink 0
+            display flex
+            justify-content space-around
+
+            span.team-name
+                font-weight bold
+
+            span.points
+                letter-spacing 5px
+
+    div.main
+        display flex
+        flex-direction column
+        flex-grow 1
+
+        div.info
+            display flex
+            flex-direction column
+            align-items center
+            padding-top size-xxxl
+            flex-grow 1
+
+            > div
+                flex-shrink
+
+            div.turn
+                font-size font-size-m
+                margin-bottom size-s
+                font-weight bold
+
+            div.current-team
+                font-size font-size-l
+                color #999
+
+            div.word-and-ball
+                display flex
+                flex-grow 1
+                justify-content center
+                flex-wrap wrap
+                align-items center
+
+                div.word
+                    font-size font-size-xxl
+
+                div.ball
+                    width 150px
+                    height 150px
+                    display flex
+                    align-items center
+                    justify-content center
+                    background-color #669900
+                    color white
+                    border-radius 50%
+                    font-size 20px
+                    box-shadow 0 2px 5px 0 rgba(0, 0, 0, 0.26)
+                    align-self baseline
+
+        button.continue
+            flex-shrink 0
+            padding size-m 0
+            background-color color-blue
+            color white
+            border 0
