@@ -21,11 +21,18 @@ function navigationFactory(machina) {
             'setup-teams' : {
                 next : function() {
                     this.transition('pick-categories')
+                },
+                back : function() {
+                    this.transition('start')
                 }
             },
             'pick-categories' : {
                 next : function() {
                     this.transition('game')
+                },
+
+                back : function() {
+                    this.transition('setup-teams')
                 }
             },
             game : {

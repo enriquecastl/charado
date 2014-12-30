@@ -53,18 +53,6 @@ describe('navigation', function() {
             })
         })
 
-        describe('given the current state is setup-teams', function() {
-            beforeEach(buildSut)
-            beforeEach(function() {
-                sut.transition('setup-teams')
-                sut.handle('next')
-            })
-
-            it('should transition to pick-categories', function() {
-                expect(sut.state).toEqual('pick-categories')
-            })
-        })
-
         describe('given the current state is pick-categories', function() {
             beforeEach(buildSut)
             beforeEach(function() {
@@ -100,6 +88,31 @@ describe('navigation', function() {
                 expect(sut.state).toEqual('start')
             })
         })
+    })
 
+    describe('when going back', function() {
+        describe('given the current state is setup-teams', function() {
+            beforeEach(buildSut)
+            beforeEach(function() {
+                sut.transition('setup-teams')
+                sut.handle('back')
+            })
+
+            it('should transition to start', function() {
+                expect(sut.state).toEqual('start')
+            })
+        })
+
+        describe('given the current state is pick-categories', function() {
+            beforeEach(buildSut)
+            beforeEach(function() {
+                sut.transition('pick-categories')
+                sut.handle('back')
+            })
+
+            it('should transition to setup-teams', function() {
+                expect(sut.state).toEqual('setup-teams')
+            })
+        })
     })
 })
