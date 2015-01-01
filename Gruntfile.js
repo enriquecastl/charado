@@ -21,6 +21,10 @@ module.exports = function(grunt) {
         features: 'app/**',
         // Task configuration.
         browserify : {
+            test : {
+                src : ['specs/**/*.js'],
+                dest : 'test/build.js'
+            },
             dist : {
                 src : 'app/main/index.js',
                 dest : '<%= dist + "/" + distFiles.build %>'
@@ -71,6 +75,9 @@ module.exports = function(grunt) {
             },
             lib_test: {
                 src: ['app/**/*.js', 'app/*.js']
+            },
+            test: {
+                src: ['specs/**/*.js']
             }
         },
         html2js: {
@@ -105,6 +112,13 @@ module.exports = function(grunt) {
                 }
             }
         },
+        karma : {
+            unit: {
+                configFile: 'karma.conf.js',
+                background : true,
+                singleRun : false
+            }
+        },
         watch: {
             options: {
                 livereload : true
@@ -136,6 +150,10 @@ module.exports = function(grunt) {
             assets: {
                 files: 'app/**/assets/*',
                 tasks: ['newer:copy:dist']
+            },
+            karma: {
+                files: ['specs/**/*.js', 'app/**/*.js'],
+                tasks : ['build-test', 'karma:unit:run']
             }
         }
     });
@@ -152,6 +170,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-html2js')
     grunt.loadNpmTasks('grunt-newer')
     grunt.loadNpmTasks('grunt-browserify')
+    grunt.loadNpmTasks('grunt-karma')
 
     // Default task.
     grunt.registerTask('styles', ['concat', 'stylus'])
@@ -159,5 +178,7 @@ module.exports = function(grunt) {
     grunt.registerTask('templates', ['html2js', 'compile-handlebars'])
     grunt.registerTask('build', ['newer:copy:dist', 'styles', 'compile', 'templates', 'clean'])
     grunt.registerTask('serve', ['build', 'connect:serve', 'watch'])
+    grunt.registerTask('build-test', ['jshint', 'browserify:test'])
+    grunt.registerTask('test', ['karma:unit:start', 'watch:karma'])
     grunt.registerTask('default', ['build'])
 }

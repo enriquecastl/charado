@@ -8,7 +8,8 @@
         require('../start')(),
         require('../setup-teams')(),
         require('../pick-categories')(),
-        require('../play-game')()
+        require('../play-game')(),
+        require('../navigation')()
     ])
 
     return module
