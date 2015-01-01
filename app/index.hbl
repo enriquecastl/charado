@@ -16,6 +16,6 @@
         <script src="{{build}}"></script>
     </head>
     <body>
-        <play-game></play-game>
+        <navigation></navigation>
     </body>
 </html>
