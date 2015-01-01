@@ -153,7 +153,7 @@ module.exports = function(grunt) {
             },
             karma: {
                 files: ['specs/**/*.js', 'app/**/*.js'],
-                tasks : ['jshint', 'browserify:test', 'karma:unit:run']
+                tasks : ['build-test', 'karma:unit:run']
             }
         }
     });
@@ -179,6 +179,6 @@ module.exports = function(grunt) {
     grunt.registerTask('build', ['newer:copy:dist', 'styles', 'compile', 'templates', 'clean'])
     grunt.registerTask('serve', ['build', 'connect:serve', 'watch'])
     grunt.registerTask('build-test', ['jshint', 'browserify:test'])
-    grunt.registerTask('test', ['build-test', 'karma:unit:run', 'watch:karma'])
+    grunt.registerTask('test', ['karma:unit:start', 'watch:karma'])
     grunt.registerTask('default', ['build'])
 }
